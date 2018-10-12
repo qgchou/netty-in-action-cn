@@ -20,10 +20,15 @@ public class PlainNioServer {
     public void serve(int port) throws IOException {
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
         serverChannel.configureBlocking(false);
-        ServerSocket ss = serverChannel.socket();
+        /*ServerSocket ss = serverChannel.socket();
         InetSocketAddress address = new InetSocketAddress(port);
         //将服务器绑定到选定的端口
-        ss.bind(address);
+        ss.bind(address);*/
+        //java7 以后，可以直接调用 ServerSocketChannel 的 bind 方法绑定地址，不用先取 ServerSocketChannel 关联的 ServerSocket 对象
+		InetSocketAddress address = new InetSocketAddress(port);
+		//将服务器绑定到选定的端口
+		serverChannel.bind(address);
+
         //打开Selector来处理 Channel
         Selector selector = Selector.open();
         //将ServerSocketChannel注册到Selector以接受连接

@@ -51,4 +51,9 @@ public class PlainOioServer {
             e.printStackTrace();
         }
     }
+
+	public static void main(String[] args) throws IOException
+	{
+		new PlainOioServer().serve(30000);
+	}
 }
